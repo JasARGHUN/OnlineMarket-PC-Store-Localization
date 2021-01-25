@@ -1,0 +1,123 @@
+﻿@model Company
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = localizer["Add Company"];
+}
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<br />
+<br />
+<div>
+    <form method="post">
+        <div class="row p-2 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Id != 0)
+            {
+                // Edit
+                title = localizer["Edit Company"];
+            }
+
+            <div class="col-12 border-bottom">
+                <h3>@title</h3>
+            </div>
+
+            <div class="col-12 pt-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["Name"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["IsAuthorizedCompany"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input type="checkbox" asp-for="IsAuthorizedCompany" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["Address"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["City"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["State"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="State" class="form-control" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["PostalCode"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PostalCode" class="form-control" />
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["PhoneNumber"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        @if (Model.Id != 0)
+                        {
+                            <partial name="_EditAndBackToListButton" model="Model.Id" />
+                        }
+                        else
+                        {
+                            <partial name="_CreateAndBackToListButton" model="Model.Id" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

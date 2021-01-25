@@ -1,0 +1,55 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="container">
+    <h3 class="text-center">
+        @localizer["Manage application"]
+    </h3>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" style="font-size:2em;">1</th>
+                    <td style="font-size:2em;">
+                        @localizer["Manage application name and logo"]
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Appmanage" asp-action="EditInfo" class="btn btn-primary btn-block">
+                            <i class="fas fa-edit" style="font-size:2.2em;"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" style="font-size:2em;">2</th>
+                    <td style="font-size:2em;">
+                        @localizer["Manage social links"]
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Appmanage" asp-action="SocialList" class="btn btn-primary btn-block">
+                            <i class="fas fa-edit" style="font-size:2.2em;"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" style="font-size:2em;">3</th>
+                    <td style="font-size:2em;">
+                        @localizer["Manage addresses"]
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Appmanage" asp-action="AddressList" class="btn btn-primary btn-block">
+                            <i class="fas fa-edit" style="font-size:2.2em;"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

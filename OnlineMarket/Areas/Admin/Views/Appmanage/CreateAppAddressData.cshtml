@@ -1,0 +1,110 @@
+﻿@model AppAddressCreateViewModel
+
+@{
+    ViewBag.Title = localizer["Add address"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="container">
+    <div class="card text-center m-2 p-2">
+        <form asp-action="CreateAppAddressData" asp-controller="Appmanage" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label style="font-size:1.5em; font-weight:bolder;">
+                    @localizer["City"]
+                </label>
+                <input asp-for="City" class="form-control" />
+                <div>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label style="font-size:1.5em; font-weight:bolder;">
+                    @localizer["Address"]
+                </label>
+                <input asp-for="Address" class="form-control" />
+                <div>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label style="font-size:1.5em; font-weight:bolder;">
+                    @localizer["Phone"]
+                </label>
+                <input asp-for="Phone" class="form-control" />
+                <div>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label style="font-size:1.5em; font-weight:bolder;">
+                    @localizer["Email"]
+                </label>
+                <input asp-for="Email" class="form-control" />
+                <div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <label style="font-size:1.5em; font-weight:bolder;">
+                        @localizer["Description"]
+                    </label>
+                </div>
+                <div>
+                    <textarea asp-for="Description" class="form-control" rows="8"></textarea>
+                </div>
+                <div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label style="font-size:1.5em; font-weight:bolder;">
+                    @localizer["AppPicture"]
+                </label>
+                <div class="custom-file">
+                    <input asp-for="AppPicture" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Click here to change image...</label>
+                </div>
+            </div>
+            <hr />
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-primary" style="font-size:1.3em;">
+                    @localizer["Add"]
+                </button>
+                <a asp-action="AddressList" asp-controller="Appmanage" class="btn btn-outline-warning" style="font-size:1.3em;">
+                    @localizer["Back"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+
+
+    </script>
+}

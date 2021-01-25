@@ -1,0 +1,56 @@
+﻿@model AppInfoEditViewModel
+
+@{
+    ViewBag.Title = localizer["Application data update panel"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var photoPath = "~/images/" + (Model.ExistingImagePath ?? "HomePageImg.jpg");
+}
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="container">
+    <div class="card text-center m-2 p-2" style="margin-top:10%;">
+        <form asp-action="EditInfo" asp-controller="Appmanage" enctype="multipart/form-data" method="post">
+
+            <input hidden asp-for="Id" />
+            <input hidden asp-for="ExistingImagePath" />
+
+            <div class="form-group">
+                <label asp-for="AppName">
+                    <strong style="font-size:1.5em; font-weight:bolder;">
+                        @localizer["Application Name:"]
+                    </strong>
+                </label>
+                <input type="text" asp-for="AppName" class="form-control" />
+                <span asp-validation-for="AppName" class="text-danger"></span>
+            </div>
+            <hr />
+
+            <div class="form-group">
+                <label asp-for="AppImages">
+                    <strong style="font-size:1.5em; font-weight:bolder;">
+                        @localizer["Logo image"]
+                    </strong>
+                </label>
+                <div class="form-group row col-sm-4 offset-4">
+                    <img src="@photoPath" style="height:100%; width:100%;" asp-append-version="true" />
+                </div>
+                <hr />
+                <div class="custom-file">
+                    <input asp-for="AppImages" class="form-control custom-file-input" />
+                    <label class="custom-file-label">
+                        @localizer["Click here to change image..."]
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@localizer["Edit"]" class="btn btn-outline-success" style="font-size:1.3em;" />
+                <a asp-action="Index" class="btn btn-outline-warning" style="font-size:1.3em;">
+                    @localizer["Cancel"]
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>

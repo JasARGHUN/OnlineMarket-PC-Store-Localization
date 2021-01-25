@@ -1,0 +1,153 @@
+﻿@page
+@model RegisterModel
+@using OnlineMarket.Utility
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@{
+    ViewData["Title"] = localizer["Register"];
+}
+
+<div class="py-4">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-8 offset-2">
+            <div class="card" style="box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.71);">
+                <div class="card-body px-lg-5 pt-4">
+                    <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <h3 class="col-12 text-success text-center py-4">
+                            @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_SuperAdmin))
+                            {
+                                <strong>
+                                    @localizer["Register an User Account"]
+                                </strong>
+                            }
+                            else
+                            {
+                                <strong>
+                                    @localizer["Sign Up"]
+                                </strong>
+                            }
+                        </h3>
+                        <hr />
+                        <div class="py-2">
+                            <input asp-for="Input.Name" placeholder="@localizer["Name"]" class="form-control" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="py-2">
+                            <input asp-for="Input.Email" type="email" placeholder="@localizer["Email"]" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="py-2 input-group">
+                            <input asp-for="Input.PhoneNumber" type="text" placeholder="+770000000" class="form-control" />
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="py-2">
+                            <input asp-for="Input.Address" placeholder="@localizer["Street Address"]" class="form-control" />
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
+                        <div class="py-2">
+                            <input asp-for="Input.City" placeholder="@localizer["City"]" class="form-control" />
+                            <span asp-validation-for="Input.City" class="text-danger"></span>
+                        </div>
+                        <div class="form-row py-2">
+                            <div class="col">
+                                <input asp-for="Input.State" placeholder="@localizer["State"]" class="form-control" />
+                                <span asp-validation-for="Input.State" class="text-danger"></span>
+                            </div>
+                            <div class="col">@localizer[""]
+                                <input asp-for="Input.PostalCode" placeholder="@localizer["Postal Code"]" class="form-control" />
+                                <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-row py-2">
+                            <div class="col">
+                                <input asp-for="Input.Password" type="password" placeholder="@localizer["Password"]" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <input asp-for="Input.ConfirmPassword" type="password" placeholder="@localizer["Confirm Password"]" class="form-control" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_SuperAdmin))
+                        {
+                            <div class="form-group">
+                                <label asp-for="Input.Role"></label>
+                                @Html.DropDownListFor(m => m.Input.Role, Model.Input.RoleList,
+                               "-Please select a role", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.CompanyId"></label>
+                                @Html.DropDownListFor(m => m.Input.CompanyId, Model.Input.CompanyList,
+                               "-Please select a company", new { @class = "form-control" })
+                            </div>
+                        }
+                        <div class="py-2">
+                            <button type="submit" class="btn btn-success form-control">
+                                @localizer["Register"]
+                            </button>
+                        </div>
+                    </form>
+
+                    @if (!User.IsInRole(SD.Role_Admin) && !User.IsInRole(SD.Role_Employee) && !User.IsInRole(SD.Role_SuperAdmin))
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <p>
+                                @localizer["By clicking Register you agree to our"]
+                                @localizer["terms of service"]
+                            </p>
+                            <hr />
+
+                            <div class="row mb-5">
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <div class="col-6">
+                                            @if (provider.Name.ToLower().Contains("facebook"))
+                                            {
+                                                <button type="submit" class="btn btn-block facebook-btn form-control text-white"
+                                                        name="provider" value="@provider.Name"
+                                                        title="Log in using your @provider.DisplayName account">
+                                                    <i class="fab fa-facebook-square"></i> @provider.DisplayName
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                @if (provider.Name.ToLower().Contains("google"))
+                                                {
+                                                    <button type="submit" class="btn btn-block google-btn form-control text-white"
+                                                            name="provider" value="@provider.Name"
+                                                            title="Log in using your @provider.DisplayName account">
+                                                        <i class="fab fa-google"></i> @provider.DisplayName
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="submit" class="btn btn-primary" name="provider"
+                                                            value="@provider.Name"
+                                                            title="Log in using your @provider.DisplayName account">
+                                                        @provider.DisplayName
+                                                    </button>
+                                                }
+                                            }
+                                        </div>
+
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

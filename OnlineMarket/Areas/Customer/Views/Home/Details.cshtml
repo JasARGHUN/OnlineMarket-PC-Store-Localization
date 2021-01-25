@@ -1,0 +1,77 @@
+﻿@model ShoppingCart
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="container mt-5 mb-5" style="margin-bottom:5%;">
+    <form method="post">
+        <input hidden asp-for="ProductId" />
+
+        <div class="row mt-5 mb-3 border p-2" style="box-shadow: 2px 2px 7px #000000;">
+
+            <div class="col-sm">
+                @*<h1 class="text-center mb-1" style="text-decoration-line:underline;">@Model.Product.Name</h1>*@
+                <img src="@Model.Product.ImageUrl" asp-append-version="true" class="d-block w-100" alt="">
+
+                <div>
+                    <hr />
+                    <p class="text-danger" style="font-size:1.3em;">
+                        @Model.Product.Category.Name @localizer["from"] @Model.Product.Manufacturer
+                    </p>
+                    <p>@localizer["Type"]: @Model.Product.Type</p>
+                    <p>@localizer["Processor"]: @Model.Product.Processor</p>
+                    <p>@localizer["RAM"]: @Model.Product.RAM</p>
+                    <p>@localizer["PowerSupply"]: @Model.Product.PowerSupply</p>
+                    <p>@localizer["StorageDevice"]: @Model.Product.StorageDevice</p>
+                    <p>@localizer["VideoCard"]: @Model.Product.VideoCard</p>
+                    <p>@localizer["OperatingSystem"]: @Model.Product.OperatingSystem</p>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div>
+                    <h2 class="text-center mt-2">@Model.Product.Name</h2>
+                    <h5>@localizer["Description"]</h5>
+                    <p class="text-dark text-decoration-none">
+                        @Html.Raw(Model.Product.Description)
+                    </p>
+
+                    <div class="mt-2">
+
+                        @if (@Model.Product.ListPrice.ToString() != null)
+                        {
+                            <h5>@localizer["Price"]: <strike>@Model.Product.ListPrice $</strike></h5>
+                        }
+
+                        <h3>
+                            <span class="badge badge-danger">
+                                @localizer["Discount price"]: @Model.Product.Price $
+                            </span>
+                        </h3>
+                        <div class="border border-dark" style="width:220px;">
+                            <input asp-for="Count" class="form-control" placeholder="@localizer["Count"]">
+                        </div>
+                        <span asp-validation-for="Count" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <hr />
+                    <div class="row">
+                        <a asp-action="Index" class="btn btn-outline-primary form-control col-sm m-1" style="height:50px;">
+                            @localizer["Back to List"]
+                        </a>
+                        <button type="submit" value="Add to Cart" class="btn btn-outline-success form-control col-sm m-1" style="height:50px;">
+                            @localizer["Add to Cart"]
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

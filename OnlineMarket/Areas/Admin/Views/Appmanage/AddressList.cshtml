@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AppAddress>
+
+@{
+    ViewBag.Title = "Control panel: Our contacts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col">
+                @localizer["City"]
+            </th>
+            <th scope="col">
+                @localizer["Addresses"]
+            </th>
+            <th scope="col">
+                @localizer["Phone"]
+            </th>
+            <th scope="col">
+                @localizer["Email"]
+            </th>
+        </tr>
+    </thead>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+
+            <tbody>
+                <tr>
+                    <th>
+                        <img class="borderRadius border border-dark" src="~/images/@item.Picture" height="40" width="40" asp-append-version="true" />
+                    </th>
+                    <th>@item.City</th>
+                    <th>@item.Address</th>
+                    <th>@item.Phone</th>
+                    <th>@item.Email</th>
+
+                    <td class="text-right">
+                        <form asp-action="DeleteAddress" asp-route-id="@item.Id" method="post">
+                            <a class="btn btn-outline-warning" asp-action="EditAppAddressData" asp-route-id="@item.Id">
+                                @localizer["Edit"]
+                            </a>
+                            <button type="submit" class="btn btn-outline-danger" onclick="return confirm('@localizer["do you really want to delete:"] @item.Address')">
+                                @localizer["Delete"]
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    }
+    else
+    {
+        <tbody>
+            <tr>
+                <th>
+                    @localizer["No data"]
+                </th>
+            </tr>
+        </tbody>
+    }
+</table>
+<a asp-action="CreateAppAddressData" class="btn btn-outline-success" style="font-size:1.3em;">
+    @localizer["Add"]
+</a>
+<a asp-action="Index" class="btn btn-outline-primary" style="font-size:1.3em;">
+    @localizer["Back"]
+</a>

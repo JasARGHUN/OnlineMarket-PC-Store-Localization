@@ -1,0 +1,252 @@
+﻿@model ProductViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = localizer["Add Product"];
+}
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row p-2 border" style="margin-top:10%;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (Model.Product.Id != 0)
+            {
+                // Edit
+                title = localizer["Edit Product"];
+                <input type="hidden" asp-for="Product.Id" />
+            }
+
+            <div class="col-12 border-bottom">
+                <h3>@title</h3>
+            </div>
+
+            <div class="col-12 pt-4">
+
+                @if (Model.Product.Id != 0)
+                {
+                    <div class="form-group row p-2">
+                        <img src="@Model.Product.ImageUrl" />
+                    </div>
+                }
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["ProductName"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Name" class="form-control" />
+                        <span asp-validation-for="Product.Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        @localizer["Image"]
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["Description"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="Product.Description" class="form-control" rows="15"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["ProductManufacturer"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Manufacturer" class="form-control" />
+                        <span asp-validation-for="Product.Manufacturer" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        @localizer["Category"]
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList, "-Select a Category",
+                       new { @class = "form-control" })
+                        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["ListPrice"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.ListPrice" class="form-control" />
+                        <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["Price"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Price" class="form-control" />
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <hr />
+                <h5 class="text-center">
+                    @localizer["DetailedDescription"]
+                </h5>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["Type"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Type" class="form-control" />
+                        <span asp-validation-for="Product.Type" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["Processor"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Processor" class="form-control" />
+                        <span asp-validation-for="Product.Processor" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["RAM"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.RAM" class="form-control" />
+                        <span asp-validation-for="Product.RAM" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["PowerSupply"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.PowerSupply" class="form-control" />
+                        <span asp-validation-for="Product.PowerSupply" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["StorageDevice"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.StorageDevice" class="form-control" />
+                        <span asp-validation-for="Product.StorageDevice" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["VideoCard"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.VideoCard" class="form-control" />
+                        <span asp-validation-for="Product.VideoCard" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>
+                            @localizer["OperatingSystem"]
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.OperatingSystem" class="form-control" />
+                        <span asp-validation-for="Product.OperatingSystem" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        @if (Model.Product.Id != 0)
+                        {
+                            <partial name="_EditAndBackToListButton" model="Model.Product.Id" />
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" onclick="return validateInput()" class="btn btn-sm btn-outline-success form-control">
+                                        @localizer["Add"]
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <a asp-action="Index" class="btn btn-sm btn-outline-primary form-control text-center">
+                                        @localizer["Back"]
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/3qaegff8mo61lk0xki6vwf4leavdmaljpx30jpu9b3zxzh0o/tinymce/5/tinymce.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                swal("Error", "Please select an image", "error");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+}

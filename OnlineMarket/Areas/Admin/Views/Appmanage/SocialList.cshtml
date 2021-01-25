@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AppSocialAddress>
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@{
+    ViewBag.Title = localizer["Control panel: Social Data"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col">
+                @localizer["Social URL"]
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+
+        <tbody>
+            <tr>
+                <th>
+                    <img class="borderRadius border border-dark" src="~/images/@item.AppSocialImg" height="40" width="40" asp-append-version="true" />
+                </th>
+                <th>@item.UrlAddress</th>
+                <td class="text-right">
+                    <form asp-action="DeleteSocialAddress" asp-route-id="@item.Id" method="post">
+                        <a class="btn btn-outline-warning" asp-action="EditSocialData" asp-route-id="@item.Id">
+                            @localizer["Edit"]
+                        </a>
+                        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('@localizer["do you really want to delete:"] @item.UrlAddress')">
+                            @localizer["Delete"]
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+<a asp-action="CreateSocialData" class="btn btn-outline-success" style="font-size:1.3em;">
+    @localizer["Add"]
+</a>
+<a asp-action="Index" class="btn btn-outline-primary" style="font-size:1.3em;">
+    @localizer["Back"]
+</a>

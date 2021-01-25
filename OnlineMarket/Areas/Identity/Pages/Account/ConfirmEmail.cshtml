@@ -1,0 +1,10 @@
+﻿@page
+@model ConfirmEmailModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    ViewData["Title"] = localizer["Confirm email"];
+}
+
+<div>
+    <a asp-area="Customer" asp-controller="Home" asp-action="Index" style="font-size:1.5em;">@ViewData["Title"]</a>
+</div>

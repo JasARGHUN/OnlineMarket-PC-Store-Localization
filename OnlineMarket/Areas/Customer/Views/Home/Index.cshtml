@@ -1,0 +1,155 @@
+﻿@*@model IEnumerable<Product>*@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@model ProductViewModel
+
+@addTagHelper *, OnlineMarket
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row no-gutters">
+    <div class="col-md-4 mt-1" style="margin-left:-7px;">
+        <div class="btn-group">
+            <a asp-action="Index" class="btn btn-outline-secondary"
+               asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCategory)">
+               @localizer["Name"] <i class="fas fa-sort"></i>
+            </a>
+
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
+               class="btn btn-outline-secondary ml-1"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCategory)">
+               @localizer["Price"] <i class="fas fa-sort"></i>
+            </a>
+
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CategorySort)"
+               class="btn btn-outline-secondary ml-1"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCategory)">
+               @localizer["Category"] <i class="fas fa-sort"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4 offset-md-4 mt-1">
+        <form class="form-inline" method="get">
+            <div class="ml-1">
+                <input name="name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-outline-secondary ml-1">
+                <i class="fa fa-search" style="font-size:1.3em;"></i>
+            </button>
+
+            <a class="btn btn-outline-danger ml-1" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-sync" style="font-size:1.3em;"></i>
+            </a>
+        </form>
+    </div>
+</div>
+
+<br />
+<div>
+    <div class="row" style="float:left;">
+        <div id="categories" class="m-2">
+            @await Component.InvokeAsync("NavigationMenu")
+        </div>
+    </div>
+
+    <div class="row pb-5">
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-lg-4 col-md-9">
+                <a asp-action="Details" class="btn btn-outline-dark p-2 m-2" style="text-decoration:none;
+            box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.71);" asp-route-id="@item.Id">
+                    <div class="card text-black-50">
+                        <div class="card-header">
+                            <p>@localizer["Category"]: @item.Category.Name</p>
+                        </div>
+
+                        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <hr />
+
+                            @if (item.ListPrice.ToString() != null)
+                            {
+                                <p>@localizer["Price"]: <span class="badge badge-warning">@item.ListPrice $</span></p>
+                            }
+
+                            <h5 class="text-danger" style="font-size:1.3em;">@localizer["Discount price"] 
+                                <span class="badge badge-success">
+                                    <strong style="font-size:1.3em;">
+                                        @item.Price $
+                                    </strong>
+                                </span>
+                            </h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    @if (Model.PagingInfo.TotalPages == 0)
+    {
+        <div class="text-center mt-4">
+            <h3 class="text-warning">@localizer["Sorry, no results were found for your search."]</h3>
+        </div>
+    }
+</div>
+
+
+<br />
+<hr />
+
+<div class="d-flex justify-content-center">
+    <nav class="btn-group" aria-label="Suppliers navigation example" style="cursor:pointer;">
+
+        @if (Model.PagingInfo.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PagingInfo.PageNumber - 1)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-sortorder="@(Model.SortViewModel.Current)"
+               class="m-1">
+                <i class="fas fa-chevron-left" style="font-size:36px; margin-top:-4px;"></i>
+            </a>
+        }
+        else
+        {
+            <a class="m-1">
+                <i class="fas fa-chevron-left" style="font-size:36px; margin-top:-4px;"></i>
+            </a>
+        }
+
+        <page-link page-model="Model.PagingInfo" page-action="Index"
+                   page-url-name="@(Model.FilterViewModel.SelectedName)"
+                   page-url-company="@(Model.FilterViewModel.SelectedCategory)"
+                   page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
+
+        @if (Model.PagingInfo.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PagingInfo.PageNumber + 1)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-sortorder="@(Model.SortViewModel.Current)"
+               class="m-1 mb-2">
+                <i class="fas fa-chevron-right" style="font-size:36px; margin-top:-4px;"></i>
+            </a>
+        }
+        else
+        {
+            <a class="m-1">
+                <i class="fas fa-chevron-right" style="font-size:36px; margin-top:-4px;"></i>
+            </a>
+        }
+
+    </nav>
+</div>

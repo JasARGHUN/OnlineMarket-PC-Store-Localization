@@ -1,0 +1,13 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="container">
+    <br />
+    <h1 class="text-center mt-5 mb-5">
+        <strong>
+            @localizer["Contacts"]
+        </strong>
+    </h1>
+    <div class="m-2 p-2">
+        @await Component.InvokeAsync("AppAddress")
+    </div>
+</div>

@@ -1,0 +1,5 @@
+﻿@model ApplicationUser
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@localizer["Welcome"] @Model.Name! <i class="far fa-user"></i>

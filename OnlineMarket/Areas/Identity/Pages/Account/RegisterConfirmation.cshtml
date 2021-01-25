@@ -1,0 +1,27 @@
+﻿@page
+@model RegisterConfirmationModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@{
+    ViewData["Title"] = localizer["Register confirmation"];
+}
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+    @{
+        if (@Model.DisplayConfirmAccountLink)
+        {
+            <p>
+                <a id="confirm-link" href="@Model.EmailConfirmationUrl">
+                    @localizer["Click here to confirm your account"]
+                </a>
+            </p>
+        }
+        else
+        {
+            <p>
+                @localizer["Please check your email to confirm your account."]
+            </p>
+        }
+    }
+</div>

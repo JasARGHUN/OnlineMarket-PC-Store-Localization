@@ -1,0 +1,15 @@
+﻿@model int
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="row">
+    <div class="col">
+        <button type="submit" class="btn btn-sm btn-outline-success form-control" asp-route-id="@Model">
+            @localizer["Update"]
+        </button>
+    </div>
+    <div class="col">
+        <a asp-action="Index" class="btn btn-sm btn-outline-primary form-control">
+            @localizer["Back"]
+        </a>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+﻿@model ShoppingCartViewModel
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<form method="post">
+    @if (Model.ListCart.Count() > 0)
+    {
+        <div class="container mt-5 mb-5">
+            <div class="card mt-3">
+                <div class="card-header ml-0 row container">
+
+                    <div class="col-6">
+                        <i class="fa fa-shopping-cart"></i>
+                        @localizer["Shopping Cart"]
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+                    @foreach (var i in Model.ListCart)
+                    {
+                        <div class="row">
+
+                            <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                <img src="@i.Product.ImageUrl" class="rounded" width="100%" />
+                            </div>
+
+                            <div class="col-12 text-sm-center col-lg-6 text-lg-left">
+                                <h5>@i.Product.Name</h5>
+                                <p>
+                                    <small>
+                                        @localizer[""]
+                                        @Html.Raw(i.Product.Description)
+                                    </small>
+                                </p>
+                            </div>
+
+                            <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
+
+                                <div class="col-4 text-md-right" style="padding-top:5px;">
+                                    <h6><strong>@i.Price<span class="text-muted">x</span>@i.Count</strong></h6>
+                                </div>
+
+                                <div class="col-6 col-sm-4 col-lg-6">
+
+                                    <div class="float-right mx-1">
+                                        <a asp-action="Plus" asp-route-cartId="@i.Id" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="float-right mx-1">
+                                        <a asp-action="Minus" asp-route-cartId="@i.Id" class="btn btn-danger">
+                                            <i class="fas fa-minus"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-2 col-sm-4 col-lg-2 text-right">
+
+                                    <a asp-action="Remove" asp-route-cartId="@i.Id" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr />
+                    }
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                            <ul class="list-group">
+
+                                <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <span class="text-info"> @localizer["Total"]:</span>
+                                    <strong class="text-info"><span id="txtOrderTotal">@Model.OrderHeader.OrderTotalSum $</span></strong>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    @*If we only need to work with verified accounts, use this code*@
+                    @if (!Model.OrderHeader.ApplicationUser.EmailConfirmed &&
+                      Model.OrderHeader.ApplicationUser.CompanyId != null &&
+                      Model.OrderHeader.ApplicationUser.Company.IsAuthorizedCompany)
+                    {
+                        <div class="col-8 text-danger">
+                            <h5>
+                                @localizer["Email must be confirmed for authorized customers!"]
+                            </h5>
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-warning">
+                                @localizer["Click here to resend confirmation your Email."]
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-center">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-info form-control m-1">
+                                @localizer["Continue Shopping"]
+                            </a>
+                            <a asp-controller="Cart" asp-action="Summary" class="btn btn-success form-control m-1">
+                                @localizer["Summary"]
+                            </a>
+                        </div>
+                    }
+
+                    @*<div class="d-flex justify-content-center p-2">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-info form-control">Continue Shopping</a>
+                            <a asp-controller="Cart" asp-action="Summary" class="btn btn-success form-control">Summary</a>
+                        </div>*@
+
+                </div>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="text-danger text-center" style="margin-top:23%;">
+            @localizer["Your cart empty"]
+        </h3>
+    }
+
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

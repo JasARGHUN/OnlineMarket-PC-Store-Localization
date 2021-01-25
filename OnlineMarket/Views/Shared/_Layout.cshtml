@@ -1,0 +1,179 @@
+﻿@using OnlineMarket.Utility
+@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor HttpContextAccessor
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/images/logo-4.jpg" type="image/x-icon">
+    <title>@ViewData["Title"] - @await Component.InvokeAsync("AppNameOnly")</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/css/sweetalert.min.css" />
+    <link rel="stylesheet" href="~/css/fontawesome.css" />
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+</head>
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+             style="z-index:100;">
+
+            <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="m-1 mr-lg-5" style="text-decoration:none;">
+                @await Component.InvokeAsync("AppName")
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Index"
+                           class="nav-link text-dark">@localizer["Services"]</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="#">Some Link</a>
+                        </li>*@
+                    @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_SuperAdmin))
+                    {
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration-line:underline;">
+                                @localizer["Admin panel"]
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                                    @localizer["Category List"]
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">
+                                    @localizer["Product List"]
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="appmanage" asp-action="Index">
+                                    @localizer["Application Manage"]
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">
+                                    @localizer["Company List"]
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">
+                                    @localizer["User List"]
+                                </a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_SuperAdmin))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration-line:underline;">
+                               @localizer["Order panel"]
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index"
+                                   style="text-decoration-line:underline;">
+                                   @localizer["Manage orders"]
+                                </a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole(SD.Role_User_Individual) || User.IsInRole(SD.Role_User_Company))
+                    {
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Index"
+                               class="nav-link text-dark">
+                                @localizer["Orders history"]
+                            </a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Contact" asp-action="Index"
+                           class="nav-link text-dark">
+                           @localizer["Contacts"]
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="d-inline">
+                    @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionShoppingCart) != null)
+                    {
+                        <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link text-dark">
+                            @{
+                                var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionShoppingCart);
+                            }
+                            <i class="fas fa-shopping-cart"></i> (@count)
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#" class="nav-link text-dark">
+                            <i class="fas fa-shopping-cart"></i> (0)
+                        </a>
+                    }
+                </div>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <partial name="_Culture" />
+                    </li>
+                </ul>
+
+                <partial name="_LoginPartial" />
+
+            </div>
+
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            <partial name="_Notifications" />
+            <div class="mt-5">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-top footer">
+
+        <div class="container">
+            &copy; 2020 - @await Component.InvokeAsync("AppNameOnly")
+            <div style="float:right">
+                @await Component.InvokeAsync("SocialAddress")
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/js/kitfontawesome.js"></script>
+    <script src="~/js/fontawesome.js"></script>
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+
+    @*@RenderSection("Scripts", required: false)*@
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <ejs-scripts></ejs-scripts>
+</body>
+</html>
