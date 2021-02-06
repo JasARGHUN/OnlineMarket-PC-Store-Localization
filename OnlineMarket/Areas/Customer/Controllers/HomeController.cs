@@ -128,7 +128,8 @@ namespace OnlineMarket.Areas.Customer.Controllers
                 PagingInfo = pagingInfo,
                 SortViewModel = new SortViewModel(sortOrder),
                 FilterViewModel = new FilterViewModel(_unitOfWork.Product.GetAll().ToList(), product, name),
-                Products = items
+                Products = items,
+                Categories = _unitOfWork.Category.GetAll()
             };
 
             return View(productsListView);
