@@ -1,0 +1,76 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<CallBack>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    ID
+                </th>
+                <th scope="col">
+                    Client
+                </th>
+                <th scope="col">
+                    Desired form of communication
+                </th>
+                <th scope="col">
+                    Message sending time
+                </th>
+                <th>
+                    Status
+                </th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.OrderByDescending(x => x.Id))
+        {
+
+            <tbody>
+                <tr>
+                    <th>@item.Id</th>
+                    <th>@item.Name</th>
+                    <th>@item.Contact</th>
+                    <th>@item.CallTime</th>
+                    <th>
+                        <h5>
+                            @if (item.Marked == true)
+                            {
+                                <span class="badge badge-success badge-pill" style="font-size:1em;">
+                                    Readed
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger badge-pill" style="font-size:1em;">
+                                    In anticipation
+                                </span>
+                            }
+                        </h5>
+                    </th>
+                    <th class="text-right">
+                        <form asp-action="DeleteCallBack" asp-route-id="@item.Id" method="post">
+                            <a class="btn btn-outline-warning form-group" asp-action="FeedBackDetails" asp-route-id="@item.Id">
+                                Message details
+                            </a>
+                            <button type="submit" class="btn btn-outline-danger form-group" onclick="return confirm('Delete: @item.Id?')">
+                                Remove
+                            </button>
+                        </form>
+                    </th>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+<div class="m-2">
+    @*Pagination*@
+    <nav style="float:left" aria-label="CallBack Paging">
+        <h5>@await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })</h5>
+        <hr />
+    </nav>
+</div>

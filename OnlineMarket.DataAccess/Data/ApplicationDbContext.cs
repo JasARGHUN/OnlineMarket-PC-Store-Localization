@@ -40,5 +40,6 @@ namespace OnlineMarket.DataAccess.Data
         public DbSet<AppInfo> AppInfos { get; set; }
         public DbSet<AppSocialAddress> AppSocialAddresses { get; set; }
         public DbSet<AppAddress> AppAddresses { get; set; }
+        public DbSet<CallBack> CallBacks { get; set; }
     }
 }

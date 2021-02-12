@@ -44,8 +44,8 @@
                            class="nav-link text-dark">@localizer["Services"]</a>
                     </li>
                     @*<li class="nav-item">
-                            <a class="nav-link" href="#">Some Link</a>
-                        </li>*@
+            <a class="nav-link" href="#">Some Link</a>
+        </li>*@
                     @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_SuperAdmin))
                     {
                         <li class="nav-item dropdown">
@@ -80,12 +80,26 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration-line:underline;">
-                               @localizer["Order panel"]
+                                @localizer["Order panel"]
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index"
                                    style="text-decoration-line:underline;">
-                                   @localizer["Manage orders"]
+                                    @localizer["Manage orders"]
+                                </a>
+                            </div>
+                        </li>
+                    }
+                    @if (User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_SuperAdmin))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration-line:underline;">
+                                @localizer["Feedback"] Добавить локализацию!
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Feedback" asp-action="Index">
+                                    Feedback
                                 </a>
                             </div>
                         </li>
@@ -103,7 +117,7 @@
                     <li class="nav-item">
                         <a asp-area="" asp-controller="Contact" asp-action="Index"
                            class="nav-link text-dark">
-                           @localizer["Contacts"]
+                            @localizer["Contacts"]
                         </a>
                     </li>
                 </ul>
@@ -148,17 +162,6 @@
         </main>
     </div>
 
-    <footer class="border-top footer">
-
-        <div class="container">
-            &copy; 2020 - @await Component.InvokeAsync("AppNameOnly")
-            <div style="float:right">
-                @await Component.InvokeAsync("SocialAddress")
-            </div>
-        </div>
-
-    </footer>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -166,7 +169,7 @@
     <script src="~/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/js/sweetalert2@9.js"></script>
     <script src="~/js/kitfontawesome.js"></script>
     <script src="~/js/fontawesome.js"></script>
     <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>

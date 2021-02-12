@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace OnlineMarket.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_SuperAdmin + "," + SD.Role_Employee)]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_SuperAdmin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -74,7 +74,7 @@ namespace OnlineMarket.Areas.Admin.Controllers
             return Json(new { data = allObj });
         }
 
-        [HttpDelete]
+        [HttpDelete("id")]
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _unitOfWork.Category.Get(id);

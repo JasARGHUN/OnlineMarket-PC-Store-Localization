@@ -19,6 +19,7 @@ namespace OnlineMarket.DataAccess.Repository
             OrderDetails = new OrderDetailsRepository(_context);
             OrderHeader = new OrderHeaderRepository(_context);
             SP_Call = new SP_Call(_context);
+            CallBack = new CallBackRepository(_context);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -29,6 +30,7 @@ namespace OnlineMarket.DataAccess.Repository
         public IShoppingCartRepository ShoppingCart { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailsRepository OrderDetails { get; private set; }
+        public ICallBackRepository CallBack { get; private set; }
 
         public void Dispose()
         {

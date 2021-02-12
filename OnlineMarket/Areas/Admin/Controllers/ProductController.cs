@@ -145,7 +145,7 @@ namespace OnlineMarket.Areas.Admin.Controllers
             return Json(new { data = allObj });
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _unitOfWork.Product.Get(id);
