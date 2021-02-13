@@ -2,7 +2,7 @@
 
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-<div class="container mt-5 mb-5" style="margin-bottom:5%;">
+<div class="container mt-5 mb-5" style="margin-bottom:5%;" itemscope itemtype="http://schema.org/Product">
     <form method="post">
         <input hidden asp-for="ProductId" />
 
@@ -10,11 +10,12 @@
 
             <div class="col-sm">
                 @*<h1 class="text-center mb-1" style="text-decoration-line:underline;">@Model.Product.Name</h1>*@
-                <img src="@Model.Product.ImageUrl" asp-append-version="true" class="d-block w-100" alt="">
+                <img src="@Model.Product.ImageUrl" asp-append-version="true" 
+                     class="d-block w-100" alt="product image" itemprop="image">
 
                 <div>
                     <hr />
-                    <p class="text-danger" style="font-size:1.3em;">
+                    <p class="text-danger" style="font-size:1.3em;" itemprop="manufacturer">
                         @Model.Product.Category.Name @localizer["from"] @Model.Product.Manufacturer
                     </p>
                     <p>@localizer["Type"]: @Model.Product.Type</p>
@@ -29,10 +30,14 @@
 
             <div class="col-sm">
                 <div>
-                    <h2 class="text-center mt-2">@Model.Product.Name</h2>
-                    <h5>@localizer["Description"]</h5>
+                    <h2 class="text-center mt-2" itemprop="name">@Model.Product.Name</h2>
+                    <h5>
+                        @localizer["Description"]
+                    </h5>
                     <p class="text-dark text-decoration-none">
-                        @Html.Raw(Model.Product.Description)
+                        <span itemprop="description">
+                            @Html.Raw(Model.Product.Description)
+                        </span> 
                     </p>
 
                     <div class="mt-2">
@@ -42,8 +47,8 @@
                             <h5>@localizer["Price"]: <strike>@Model.Product.ListPrice $</strike></h5>
                         }
 
-                        <h3>
-                            <span class="badge badge-danger">
+                        <h3 itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                            <span class="badge badge-danger" itemprop="price">
                                 @localizer["Discount price"]: @Model.Product.Price $
                             </span>
                         </h3>

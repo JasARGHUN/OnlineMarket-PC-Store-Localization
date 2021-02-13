@@ -1,18 +1,21 @@
 ﻿@model Product
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-<div class="col-lg-4 col-md-9 filter @Model.Category.Name.Replace(' ','_')">
+<div class="col-lg-4 col-md-9 filter @Model.Category.Name.Replace(' ','_')" 
+     itemscope itemtype="http://schema.org/Product">
     <a asp-action="Details" class="btn btn-outline-dark p-2 m-2" style="text-decoration:none;
             box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.71);" asp-route-id="@Model.Id">
         <div class="card text-black-50">
-            <div class="card-header">
+            <div class="card-header" itemprop="category">
                 <p>@localizer["Category"]: @Model.Category.Name</p>
             </div>
 
-            <img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">
+            <img itemprop="image" class="card-img-top" src="@Model.ImageUrl" alt="product image">
 
             <div class="card-body">
-                <h5 class="card-title">@Model.Name</h5>
+                <h5 class="card-title" itemprop="name">
+                    @Model.Name
+                </h5>
                 <hr />
 
                 @if (Model.ListPrice.ToString() != null)
@@ -20,9 +23,10 @@
                     <p>@localizer["Price"]: <span class="badge badge-warning">@Model.ListPrice $</span></p>
                 }
 
-                <h5 class="text-danger" style="font-size:1.3em;">
+                <h5 class="text-danger" style="font-size:1.3em;" 
+                    itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                     @localizer["Discount price"]
-                    <span class="badge badge-success">
+                    <span class="badge badge-success" itemprop="price">
                         <strong style="font-size:1.3em;">
                             @Model.Price $
                         </strong>

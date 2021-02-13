@@ -53,7 +53,7 @@
 
 <br />
 <div>
-    <div class="row" style="float:left;">
+    <div  itemprop="category" class="row" style="float:left;">
         <div id="categories" class="m-2">
             @*@await Component.InvokeAsync("NavigationMenu")*@
             <div>
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div class="row pb-5">
+    <div class="row pb-5" itemscope itemtype="http://schema.org/Product">
         @foreach (var item in Model.Products)
         {
             <partial name="_IndividualProduct" model="item" />

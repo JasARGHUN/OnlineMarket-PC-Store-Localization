@@ -9,7 +9,8 @@ else
     @foreach (var item in Model)
     {
         <a href="@item.UrlAddress" target="_blank">
-            <img style="border-radius:50%;" src="~/images/@item.AppSocialImg" height="40" width="40" asp-append-version="true" />
+            <img style="border-radius:50%;" src="~/images/@item.AppSocialImg" 
+                 height="40" width="40" asp-append-version="true" alt="social link image"/>
         </a>
     }
 }
