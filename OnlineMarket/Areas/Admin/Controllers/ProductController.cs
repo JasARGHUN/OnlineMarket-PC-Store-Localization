@@ -11,6 +11,8 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using OnlineMarket.Utility;
 using OnlineMarket.DataAccess.Data;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Routing;
 
 namespace OnlineMarket.Areas.Admin.Controllers
 {
@@ -28,9 +30,26 @@ namespace OnlineMarket.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public IActionResult Index(string filter, int page = 1, string sortExpression = "Name")
         {
-            return View();
+            var qry = _unitOfWork.Product.GetAll(includeProperties: "Category");
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                qry = qry.Where(p => p.Name.Contains(filter));
+            }
+
+            var model = PagingList.Create(qry, 20, page, sortExpression, "Name");
+
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            model.Action = "Index";
+
+            return View(model);
         }
 
         public async Task<IActionResult> Upsert(int? id)

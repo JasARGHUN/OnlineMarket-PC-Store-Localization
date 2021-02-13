@@ -135,6 +135,9 @@
   <data name="Price" xml:space="preserve">
     <value>Бағасы</value>
   </data>
+  <data name="Product name" xml:space="preserve">
+    <value>Өнімнің атауы</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>Байланыстар</value>
   </data>

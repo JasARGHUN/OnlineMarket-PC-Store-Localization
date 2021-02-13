@@ -85,8 +85,8 @@ namespace OnlineMarket
             services.AddAuthentication().AddFacebook(options =>
             {
                 // This is where you change the ID and Secret to your Facebook API ID and secret.
-                options.AppId = "212472597224297";
-                options.AppSecret = "13863f963f53d7066f88340e5c8a2ed3";
+                options.AppId = "383519965985250";
+                options.AppSecret = "dfabdcd017cfd140220b2838d06130f3";
             });
             services.AddAuthentication().AddGoogle(options =>
             {

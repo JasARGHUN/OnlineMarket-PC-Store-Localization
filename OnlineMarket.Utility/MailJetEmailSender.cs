@@ -41,8 +41,8 @@ namespace OnlineMarket.Utility
                 {
                     "From",
                     new JObject {
-                        {"Email", "nexus251089@gmail.com"},
-                        {"Name", "Nexus"}
+                        {"Email", "nexus251089@protonmail.com"},
+                        {"Name", "nexus251089"}
                 }},
                 {"To",
                 new JArray {
@@ -52,7 +52,7 @@ namespace OnlineMarket.Utility
                     email
                 },{
                     "Name",
-                    "OnlineMarket" }}}},
+                    "aiomarket.kz" }}}},
                 {
                     "Subject",
                     subject },

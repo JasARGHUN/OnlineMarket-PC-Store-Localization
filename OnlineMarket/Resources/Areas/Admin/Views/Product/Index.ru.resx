@@ -135,6 +135,9 @@
   <data name="Price" xml:space="preserve">
     <value>Цена</value>
   </data>
+  <data name="Product name" xml:space="preserve">
+    <value>Название продукта</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>Контакты</value>
   </data>
