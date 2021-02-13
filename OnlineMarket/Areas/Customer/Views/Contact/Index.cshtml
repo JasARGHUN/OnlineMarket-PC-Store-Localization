@@ -17,7 +17,7 @@
 <!-- Button trigger modal -->
 <div class="text-center">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        Have questions? Write to us
+        @localizer["Have questions? Write to us!"]
     </button>
 </div>
 
@@ -27,7 +27,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">
-                    Feedback
+                    @localizer["Feedback"]
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -42,7 +42,7 @@
                             <div class="form-group row">
                                 <div class="col-4">
                                     <label asp-for="CallBack.Name">
-                                        Your name
+                                        @localizer["Your name"]
                                     </label>
                                 </div>
                                 <div class="col-8">
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <div class="col-4">
                                     <label asp-for="CallBack.Message">
-                                        Message
+                                        @localizer["Message"]
                                     </label>
                                 </div>
                                 <div class="col-8">
@@ -66,11 +66,12 @@
                             <div class="form-group row">
                                 <div class="col-4">
                                     <label asp-for="CallBack.Contact">
-                                        Desired form of communication
+                                        @localizer["Desired form of communication"]
                                     </label>
                                 </div>
                                 <div class="col-8">
-                                    <input asp-for="CallBack.Contact" class="form-control" placeholder="phone number or email" />
+                                    <input asp-for="CallBack.Contact" class="form-control" 
+                                           placeholder="@localizer["phone number or email"]" />
                                     <span asp-validation-for="CallBack.Contact" class="text-danger"></span>
                                 </div>
                             </div>
@@ -78,7 +79,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-sm btn-outline-success form-control">
-                            Send
+                            @localizer["Send"]
                         </button>
                     </div>
                 </form>

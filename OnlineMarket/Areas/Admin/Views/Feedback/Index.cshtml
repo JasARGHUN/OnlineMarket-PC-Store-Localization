@@ -1,5 +1,7 @@
 ﻿@model ReflectionIT.Mvc.Paging.PagingList<CallBack>
 
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,19 +12,19 @@
         <thead>
             <tr>
                 <th scope="col">
-                    ID
+                    @localizer["ID"]
                 </th>
                 <th scope="col">
-                    Client
+                    @localizer["Client"]
                 </th>
                 <th scope="col">
-                    Desired form of communication
+                    @localizer["Desired form of communication"]
                 </th>
                 <th scope="col">
-                    Message sending time
+                    @localizer["Message sending time"]
                 </th>
                 <th>
-                    Status
+                    @localizer["Status"]
                 </th>
                 <th class="text-center"></th>
             </tr>
@@ -41,24 +43,26 @@
                             @if (item.Marked == true)
                             {
                                 <span class="badge badge-success badge-pill" style="font-size:1em;">
-                                    Readed
+                                    @localizer["Readed"]
                                 </span>
                             }
                             else
                             {
                                 <span class="badge badge-danger badge-pill" style="font-size:1em;">
-                                    In anticipation
+                                    @localizer["In anticipation"]
                                 </span>
                             }
                         </h5>
                     </th>
-                    <th class="text-right">
+                    <th class="text-right row">
                         <form asp-action="DeleteCallBack" asp-route-id="@item.Id" method="post">
                             <a class="btn btn-outline-warning form-group" asp-action="FeedBackDetails" asp-route-id="@item.Id">
-                                Message details
+                                @*@localizer["Message details"]*@
+                                <i class="fas fa-edit"></i>
                             </a>
                             <button type="submit" class="btn btn-outline-danger form-group" onclick="return confirm('Delete: @item.Id?')">
-                                Remove
+                                @*@localizer["Remove"]*@
+                                <i class="fas fa-trash-alt"></i>
                             </button>
                         </form>
                     </th>

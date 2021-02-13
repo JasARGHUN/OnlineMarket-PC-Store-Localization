@@ -117,40 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin panel" xml:space="preserve">
-    <value>Әкімші панелі</value>
-  </data>
-  <data name="Application Manage" xml:space="preserve">
-    <value>Қолданбаны басқару</value>
-  </data>
-  <data name="Category List" xml:space="preserve">
-    <value>Санаттар тізімі</value>
-  </data>
-  <data name="Company List" xml:space="preserve">
-    <value>Компаниялар тізімі</value>
-  </data>
   <data name="Contacts" xml:space="preserve">
-    <value>Байланыстар</value>
+    <value>Contacts</value>
   </data>
-  <data name="Feedback" xml:space="preserve">
-    <value>Кері байланыс</value>
+  <data name="Our staff will contact you on your request as soon as possible!" xml:space="preserve">
+    <value>Our staff will contact you on your request as soon as possible!</value>
   </data>
-  <data name="Manage orders" xml:space="preserve">
-    <value>Тапсырыстарды басқару</value>
+  <data name="Return to the homepage" xml:space="preserve">
+    <value>Return to the homepage</value>
   </data>
-  <data name="Order panel" xml:space="preserve">
-    <value>Тапсырыс тақтасы</value>
-  </data>
-  <data name="Orders history" xml:space="preserve">
-    <value>Тапсырыс тарихы</value>
-  </data>
-  <data name="Product List" xml:space="preserve">
-    <value>Өнімдер тізімі</value>
-  </data>
-  <data name="Services" xml:space="preserve">
-    <value>Қызметтер</value>
-  </data>
-  <data name="User List" xml:space="preserve">
-    <value>Пайдаланушылар тізімі</value>
+  <data name="Thank you for your feedback!" xml:space="preserve">
+    <value>Thank you for your feedback!</value>
   </data>
 </root>

@@ -120,4 +120,25 @@
   <data name="Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
+  <data name="Desired form of communication" xml:space="preserve">
+    <value>Desired form of communication</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Have questions? Write to us!" xml:space="preserve">
+    <value>Have questions? Write to us!</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="phone number or email" xml:space="preserve">
+    <value>phone number or email</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Your name" xml:space="preserve">
+    <value>Your name</value>
+  </data>
 </root>

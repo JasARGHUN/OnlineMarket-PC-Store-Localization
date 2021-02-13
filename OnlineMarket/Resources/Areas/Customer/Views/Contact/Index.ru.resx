@@ -120,4 +120,25 @@
   <data name="Contacts" xml:space="preserve">
     <value>Контакты</value>
   </data>
+  <data name="Desired form of communication" xml:space="preserve">
+    <value>Желаемая форма общения</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Обратная связь</value>
+  </data>
+  <data name="Have questions? Write to us!" xml:space="preserve">
+    <value>Есть вопросы? Напишите нам!</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="phone number or email" xml:space="preserve">
+    <value>номер телефона или электронная почта</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Your name" xml:space="preserve">
+    <value>Ваше имя</value>
+  </data>
 </root>

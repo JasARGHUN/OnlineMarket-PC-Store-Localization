@@ -117,40 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin panel" xml:space="preserve">
-    <value>Әкімші панелі</value>
+  <data name="Client" xml:space="preserve">
+    <value>Клиент</value>
   </data>
-  <data name="Application Manage" xml:space="preserve">
-    <value>Қолданбаны басқару</value>
+  <data name="Desired form of communication" xml:space="preserve">
+    <value>Қарым-қатынастың қалаған түрі</value>
   </data>
-  <data name="Category List" xml:space="preserve">
-    <value>Санаттар тізімі</value>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
   </data>
-  <data name="Company List" xml:space="preserve">
-    <value>Компаниялар тізімі</value>
+  <data name="In anticipation" xml:space="preserve">
+    <value>Өңдеу кезінде</value>
   </data>
-  <data name="Contacts" xml:space="preserve">
-    <value>Байланыстар</value>
+  <data name="Message details" xml:space="preserve">
+    <value>Хабардың мәліметтері</value>
   </data>
-  <data name="Feedback" xml:space="preserve">
-    <value>Кері байланыс</value>
+  <data name="Message sending time" xml:space="preserve">
+    <value>Хабар жіберу уақыты</value>
   </data>
-  <data name="Manage orders" xml:space="preserve">
-    <value>Тапсырыстарды басқару</value>
+  <data name="Readed" xml:space="preserve">
+    <value>Оқылды</value>
   </data>
-  <data name="Order panel" xml:space="preserve">
-    <value>Тапсырыс тақтасы</value>
+  <data name="Remove" xml:space="preserve">
+    <value>Жою</value>
   </data>
-  <data name="Orders history" xml:space="preserve">
-    <value>Тапсырыс тарихы</value>
-  </data>
-  <data name="Product List" xml:space="preserve">
-    <value>Өнімдер тізімі</value>
-  </data>
-  <data name="Services" xml:space="preserve">
-    <value>Қызметтер</value>
-  </data>
-  <data name="User List" xml:space="preserve">
-    <value>Пайдаланушылар тізімі</value>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
   </data>
 </root>

@@ -132,6 +132,9 @@
   <data name="Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
   <data name="Manage orders" xml:space="preserve">
     <value>Manage orders</value>
   </data>
